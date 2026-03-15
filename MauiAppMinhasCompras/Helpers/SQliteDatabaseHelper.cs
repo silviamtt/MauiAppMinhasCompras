@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MauiAppMinhasCompras.Models;
 using SQLite;
-using MauiAppMinhasCompras.Models;
+
 
 namespace MauiAppMinhasCompras.Helpers
 {
-    public class SQliteDatabaseHelper
+    public class SQLiteDatabaseHelper
     {
         readonly SQLiteAsyncConnection _conn;
-        public SQliteDatabaseHelper(string path) 
+        public SQLiteDatabaseHelper(string path) 
         { 
             _conn = new SQLiteAsyncConnection(path);    
             _conn.CreateTableAsync<Produto>().Wait();
@@ -22,14 +20,13 @@ namespace MauiAppMinhasCompras.Helpers
 
         public Task<List<Produto>> Update(Produto p) 
         { 
-            string sql = "UPDATE Produto SET Descricao = ?, Quantidade = ?, Preco = ? WHERE Id = ?";
+            string sql = "UPDATE Produto SET Descricao=?, Quantidade=?, Preco=? WHERE Id=?";
 
             return _conn.QueryAsync<Produto>(sql, p.Descricao, p.Quantidade, p.Preco, p.Id);
         }
 
         public Task<int> Delete(int id) 
-        { 
-            //return _conn.DeleteAsync<Produto>(id);
+        {
             return _conn.Table<Produto>().DeleteAsync(i => i.Id == id);   
         }  
         
@@ -40,7 +37,7 @@ namespace MauiAppMinhasCompras.Helpers
 
         public Task<List<Produto>> Search(string q) 
         { 
-            string sql = "SELECT * FROM Produto WHERE Descricao LIKE '%" + q + "%'";
+            string sql = "SELECT * Produto WHERE descricao LIKE '%" + q + "%'";
 
             return _conn.QueryAsync<Produto>(sql);
         }
