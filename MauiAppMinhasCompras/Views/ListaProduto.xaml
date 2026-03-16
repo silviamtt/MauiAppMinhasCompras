@@ -5,14 +5,44 @@
              Title="Minhas Compras">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Somar" />
+        <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked_1" />
         <ToolbarItem Text="Adicionar" Clicked="ToolbarItem_Clicked" />
     </ContentPage.ToolbarItems>                 
     
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <SearchBar x:Name="txt_search" 
+                   Placeholder="Busca de Produtos"
+                   TextChanged="txt_search_TextChanged"/>
+        <CollectionView x:Name="lst_produtos" Margin="10,10,10,10">
+            <CollectionView.Header>
+                <Grid ColumnDefinitions="*, *, *, *, *, *">
+                    <Label Grid.Column="0" Text="ID" />
+                    <Label Grid.Column="1" Text="Descrição" />
+                    <Label Grid.Column="2" Text="Preço" />
+                    <Label Grid.Column="3" Text="Qnt" />
+                    <Label Grid.Column="4" Text="Total" />
+                </Grid>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <FlyoutBase.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="Remover"
+                                      Clicked="SwipeItem_Clicked"
+                                      CommandParameter="{Binding .}"/>
+                                </MenuFlyout>
+                            </FlyoutBase.ContextFlyout>
+                        <Grid ColumnDefinitions="*, *, *, *, *, *">
+                            <Label Grid.Column="0" Text="{Binding Id}" />
+                            <Label Grid.Column="1" Text="{Binding Descricao}" />
+                            <Label Grid.Column="2" Text="{Binding Preco}" />
+                            <Label Grid.Column="3" Text="{Binding Quantidade}" />
+                            <Label Grid.Column="4" Text="{Binding Total}" />
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>
