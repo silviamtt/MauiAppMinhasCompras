@@ -31,7 +31,5 @@ public partial class NovoProduto : ContentPage
             await DisplayAlertAsync("Ops", ex.Message, "OK");
         }
     }
-
-    //private void ToolbarItem_Clicked_1(object sender, EventArgs e)
     
 }
