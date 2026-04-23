@@ -17,13 +17,13 @@ public partial class NovoProduto : ContentPage
             {
                 Descricao = txt_descricao.Text,
                 Quantidade = Convert.ToDouble(txt_quantidade.Text),
-                Preco = Convert.ToDouble(txt_preco.Text)
+                Preco = Convert.ToDouble(txt_preco.Text),
+                Categoria = txt_categoria.Text   // ← novo
             };
 
             await App.Db.Insert(p);
             await DisplayAlertAsync("Sucesso!", "Registro Inserido", "OK");
-
-            //Navigation.PushAsync(new Views.NovoProduto());
+            await Navigation.PopAsync();
 
         }
         catch (Exception ex)
@@ -31,5 +31,5 @@ public partial class NovoProduto : ContentPage
             await DisplayAlertAsync("Ops", ex.Message, "OK");
         }
     }
-    
+
 }

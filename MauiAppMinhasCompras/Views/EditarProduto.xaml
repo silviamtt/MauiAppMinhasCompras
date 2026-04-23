@@ -14,9 +14,14 @@
              <Entry x:Name="txt_descricao" Text="{Binding Descricao}"/>
 
              <Label Text="Quantidade:" />
-        <Entry x:Name="txt_quantidade" Text="{Binding Quantidade}" Keyboard="Numeric" />
+             <Entry x:Name="txt_quantidade" Text="{Binding Quantidade}" Keyboard="Numeric" />
 
              <Label  Text="Preço Unitário:" />
-        <Entry x:Name="txt_preco" Text="{Binding Preco}" Keyboard="Numeric" />
-        </VerticalStackLayout>
+             <Entry x:Name="txt_preco" Text="{Binding Preco}" Keyboard="Numeric" />
+
+             <!-- Novo campo -->
+             <Label Text="Categoria:" />
+             <Entry x:Name="txt_categoria" Text="{Binding Categoria}" />
+            
+    </VerticalStackLayout>
 </ContentPage>

@@ -1,45 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiAppMinhasCompras.Views.ListaProduto"
-             Title="Minhas Compras">
-    
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked_1" />
-        <ToolbarItem Text="Adicionar" Clicked="ToolbarItem_Clicked" />
-    </ContentPage.ToolbarItems>                 
-    
-    <VerticalStackLayout>
-        <SearchBar x:Name="txt_search" 
-                   Placeholder="Busca de Produtos"
-                   TextChanged="txt_search_TextChanged"/>
-        <ListView x:Name="lst_produtos" ItemSelected="lst_produtos_ItemSelected">
-            <ListView.Header>
-                <Grid ColumnDefinitions="*, *, *, *, *">
-                    <Label Grid.Column="0" Text="ID" />
-                    <Label Grid.Column="1" Text="Descrição" />
-                    <Label Grid.Column="2" Text="Preço" />
-                    <Label Grid.Column="3" Text="Qnt" />
-                    <Label Grid.Column="4" Text="Total" />
-                </Grid>
-            </ListView.Header>
+             x:Class="MauiAppMinhasCompras.Views.ListaProduto">
 
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="20">
+        <Label Text="Lista de Produtos" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" />
+
+        <Entry x:Name="txt_search" Placeholder="Buscar por descrição..." TextChanged="txt_search_TextChanged" />
+
+        <!-- Novo filtro por categoria -->
+        <Picker x:Name="pck_filtro_categoria" 
+                Title="Filtrar por Categoria"
+                TitleColor="Black"
+                SelectedIndexChanged="pck_filtro_categoria_SelectedIndexChanged" />
+
+        <ListView x:Name="lst_produtos" 
+                  ItemSelected="lst_produtos_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <ViewCell.ContextActions>
-                            <MenuItem Text="Remover" Clicked="MenuItem_Clicked" CommandParameter="{Binding .}" />
-                        </ViewCell.ContextActions>
-                        <Grid ColumnDefinitions="*, *, *, *, *">
-                            <Label Grid.Column="0" Text="{Binding Id}" />
-                            <Label Grid.Column="1" Text="{Binding Descricao}" />
-                            <Label Grid.Column="2" Text="{Binding Preco}" />
-                            <Label Grid.Column="3" Text="{Binding Quantidade}" />
-                            <Label Grid.Column="4" Text="{Binding Total}" />
-                        </Grid>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Descricao}" FontSize="18" FontAttributes="Bold"/>
+                            <Label Text="{Binding Categoria}" FontSize="14" TextColor="Gray"/>
+                            <Label FontSize="16">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Quantidade}" />
+                                        <Span Text=" x " />
+                                        <Span Text="{Binding Preco, StringFormat='{0:C}'}" />
+                                        <Span Text=" = " />
+                                        <Span Text="{Binding Total, StringFormat='{0:C}'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>    
+        </ListView>
     </VerticalStackLayout>
+    </ScrollView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Novo" Clicked="ToolbarItem_Clicked" />
+        <ToolbarItem Text="Total Geral" Clicked="ToolbarItem_Clicked_1" />
+        <!-- Novo botão do relatório -->
+        <ToolbarItem Text="Relatório por Categoria" Clicked="ToolbarItem_Relatorio_Clicked" />
+    </ContentPage.ToolbarItems>
+   
+    
 </ContentPage>

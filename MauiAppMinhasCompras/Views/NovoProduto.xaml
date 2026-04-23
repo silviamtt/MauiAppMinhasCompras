@@ -19,5 +19,10 @@
         <Label  Text="Preço Unitário:" />
         <Entry x:Name="txt_preco" Keyboard="Numeric" />
 
+        <!-- Novo campo -->
+        <Label Text="Categoria:" />
+        <Entry x:Name="txt_categoria" Placeholder="Ex: Alimentos, Higiene, Limpeza" />
+
     </VerticalStackLayout>
+    
 </ContentPage>
